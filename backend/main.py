@@ -4,8 +4,13 @@ from pydantic import BaseModel
 from typing import Optional, List
 import sqlite3
 from datetime import datetime
+from pathlib import Path  # 경로 처리를 위해 추가
 
-DB_PATH = "budget_app.db"
+# ---------- 경로 설정 ----------
+BASE_DIR = Path(__file__).resolve().parent
+DB_DIR = BASE_DIR / "db"
+DB_PATH = DB_DIR / "budget_app.db"
+
 
 app = FastAPI(
     title="Couple Monthly Budget API",
@@ -26,6 +31,9 @@ app.add_middleware(
 # ---------- DB 유틸 ----------
 
 def get_conn():
+    # db 폴더가 없으면 자동 생성
+    DB_DIR.mkdir(parents=True, exist_ok=True)
+
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn

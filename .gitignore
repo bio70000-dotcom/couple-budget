@@ -3,13 +3,13 @@
 __pycache__/
 *.pyc
 
-# SQLite DB
+# SQLite DB (모든 db 파일 무시)
 *.db
 
-# Node modules
+# Node modules (나중에 frontend용)
 frontend/node_modules/
-dist/
-build/
+frontend/dist/
+frontend/build/
 
 # OS files
 .DS_Store
